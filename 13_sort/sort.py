@@ -6,7 +6,7 @@
     
 """
 from typing import List
-
+import itertools
 def bucket_sort(arr:List[int]):
     """桶排序"""
     min_num = min(arr)
@@ -54,6 +54,27 @@ def count_sort(arr):
         count[arr[i]-min]-=1
     return new_arr
    
+def counting_sort(a: List[int]):
+    if len(a) <= 1: return
+    
+    # a中有counts[i]个数不大于i
+    counts = [0] * (max(a) + 1)
+    for num in a:
+        counts[num] += 1
+    #这个是累加器 python这种黑科技还挺多
+    # 例如aaa=[0,0,1,2,3]
+    # list(itertools.accumulate(aaa)) [0, 0, 1, 3, 6]
+    counts = list(itertools.accumulate(counts))
+
+    # 临时数组，储存排序之后的结果
+    a_sorted = [0] * len(a)
+    for num in reversed(a):
+        index = counts[num] - 1
+        a_sorted[index] = num
+        counts[num] -= 1
+    
+    return a_sorted
+
 
 
 def radix_sort(arr:List[int]):
@@ -84,6 +105,6 @@ if __name__ == '__main__':
     arr = [random.randint(0,100) for _ in range(10)]
     print("原始数据：", arr)
     # bucket_sort(arr)
-    arr = count_sort(arr)
+    arr = counting_sort(arr)
     # arr = radix_sort(arr)
     print("排序结果：", arr)
