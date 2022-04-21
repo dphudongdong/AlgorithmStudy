@@ -1,5 +1,7 @@
 '''
     归并排序
+    https://leetcode-cn.com/problems/merge-sorted-array/submissions/
+    https://leetcode-cn.com/problems/merge-k-sorted-lists/
 '''
 #递归实现
 #非递归实现  https://www.jianshu.com/p/3f27384387c1
